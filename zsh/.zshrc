@@ -112,4 +112,3 @@ alias l="ls -la"
 alias ll="l"
 alias c="clear"
 
-#test
