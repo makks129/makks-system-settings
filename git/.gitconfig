@@ -1,0 +1,7 @@
+[user]
+	name = Maxim Strelnikov
+	email = max.strelnikov@pipedrive.com
+[alias]
+	co = checkout
+	ci = commit
+	st = status
