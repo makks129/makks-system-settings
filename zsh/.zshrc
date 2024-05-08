@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -105,6 +105,12 @@ for file in ~/.zsh/*; do
 done
 unset file
 
+# HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
 # Include z
 . ~/.zsh/plugins/z.sh
 
@@ -119,3 +125,30 @@ alias c="clear"
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# brew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# devbox
+export DEVBOX_USE_DEFAULT_BROWSER=true
+mountpoint -q /mnt/wsl/git || (mkdir -p /mnt/wsl/git && sudo mount --bind ~/git /mnt/wsl/git)
+alias db='devbox'
+alias dsd='devbox service develop'
+
+# set DISPLAY variable to the IP automatically assigned to WSL2export
+# DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+sudo /etc/init.d/dbus start &> /dev/null
+
+# SSH
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/github
+
+
+# go
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+
+
+# Add billing scripts
+source $HOME/.billing-zshrc/windows-wsl.zsh
+source $HOME/.billing-zshrc/optional.zsh

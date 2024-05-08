@@ -5,3 +5,5 @@
 	co = checkout
 	ci = commit
 	st = status
+[url "ssh://git@github.com/pipedrive"]
+        insteadOf = https://github.com/pipedrive
